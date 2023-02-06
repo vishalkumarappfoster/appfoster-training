@@ -33,7 +33,7 @@ body
 .box .left_side
 {
     position: relative;
-    background-color: #003147;
+    background-color: #48359a;
     padding: 40px;
 
 }
@@ -119,12 +119,25 @@ overflow: hidden;
     display: inline-block;
     width: 20px;
     font-size: 18px;
-    color: aqua;
+    color: black;
 }
 .contactinfo ul li span
 {
     color: white;
     font-weight: 300;
+}
+.contactinfo ul li .text
+{
+    color: white;
+}
+
+.contactinfo ul li span .text
+{
+    color: white;
+}
+a{
+    text-decoration: none;
+    color: #ffff;
 }
 
 .education h3{
