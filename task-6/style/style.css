@@ -24,7 +24,7 @@ body {
 
 .box .left_side {
   position: relative;
-  background-color:#5a42c0;
+  background-color: #5a42c0;
   padding: 40px;
 }
 .box .right_side {
@@ -92,7 +92,7 @@ body {
   display: inline-block;
   width: 20px;
   font-size: 18px;
-  color:white;
+  color: white;
 }
 .contactinfo ul li span {
   color: white;
@@ -150,7 +150,6 @@ a {
 }
 .about {
   margin-bottom: 50px;
-  
 }
 .title2 {
   color: #2d7788;
@@ -161,15 +160,12 @@ a {
 .about p {
   font: weight 400px;
   letter-spacing: 1px;
-
 }
 
-
-.skills .title2{
+.skills .title2 {
   margin-bottom: 20px;
   color: ;
   text-transform: uppercase;
-
 }
 progress[value] {
   -webkit-appearance: none;
@@ -180,61 +176,53 @@ progress[value] {
 progress[value]::-webkit-progress-bar {
   background-color: #eee;
   border-radius: 2px;
- 
 }
 progress[value]::-webkit-progress-value {
-  background-image:
-       -webkit-linear-gradient(90deg, 
-                               transparent 100%, rgba(0, 0, 0, .1) 100%, 
-                               rgba(0, 0, 0, 0.1) 100%, transparent 100%),
-       -webkit-linear-gradient(top, #7286D3, #7286D3);
-       
+  background-image: -webkit-linear-gradient(
+      90deg,
+      transparent 100%,
+      rgba(0, 0, 0, 0.1) 100%,
+      rgba(0, 0, 0, 0.1) 100%,
+      transparent 100%
+    ),
+    -webkit-linear-gradient(top, #7286d3, #7286d3);
 
-    border-radius: 0px; 
-   
-    background-size: 35px 20px, 100% 100%, 100% 100%;
+  border-radius: 0px;
+
+  background-size: 35px 20px, 100% 100%, 100% 100%;
 }
-.skills ul{
+.skills ul {
   font-weight: 400;
 }
 .skills ul li {
-    list-style: none;
-    font-weight: 800;
-    color: black;
-    text-align: left;
-    
-
+  list-style: none;
+  font-weight: 800;
+  color: black;
+  text-align: left;
 }
-.skills ul li span{
-    margin-left: 15px;
+.skills ul li span {
+  margin-left: 15px;
 }
-#skill{
+#skill {
   display: grid;
   grid-template-columns: 2fr 1fr;
-
 }
-.about h2
-{
- word-spacing: 2px;
- letter-spacing: 3px;
-
-}
-.skills h2
-{
+.about h2 {
   word-spacing: 2px;
   letter-spacing: 3px;
 }
-.about h4{
+.skills h2 {
+  word-spacing: 2px;
+  letter-spacing: 3px;
+}
+.about h4 {
   letter-spacing: 1.5px;
   padding-bottom: 4px;
 }
-.about ul li
-{
+.about ul li {
   letter-spacing: 1.5px;
 }
 .about h4 .text {
   padding-left: 400px;
   width: 50%;
-  
-  
 }
