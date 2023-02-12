@@ -1,22 +1,22 @@
-.form-group{
+.form-group {
     background-color: #f0f0f0;
     padding: 10px;
     margin-bottom: 4px;
     margin: 2px;
 
-  
+
 }
-#inputNumber
-{
+
+#inputNumber {
     width: 100%;
     padding-bottom: 2px;
 }
-#splitNumber
-{
+
+#splitNumber {
     width: 100%;
 }
-#result
-{
+
+#result {
     margin-top: 40px;
     height: 350px;
 }

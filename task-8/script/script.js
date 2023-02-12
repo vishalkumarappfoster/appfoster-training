@@ -35,7 +35,7 @@ function split() {
 
   let remaining = input;
   for (let i = 0; i < splitCount; i++) {
-    const eachSplit = Math.floor(remaining / (splitCount - i));
+    const eachSplit = Math.ceil(remaining / (splitCount - i));
     remaining -= eachSplit;
 
     const div = document.createElement("div");
