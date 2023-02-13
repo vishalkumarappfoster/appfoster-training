@@ -32,19 +32,5 @@ async function showUsers() {
     }
   }
   
-  async function displayJobs(id) {
-    try {
-      const data = await fetch("https://gorest.co.in/public/v2/users/${id}/posts");
-      const objectData = await data.json();
-      console.log(objectData);
-      document.getElementById("name").innerHTML = objectData.name;
-      document.getElementById("email").innerHTML = objectData.email;
-      document.getElementById("gender").innerHTML = objectData.gender;
-    } catch (err) {
-      console.log("error occured!", err);
-    } finally {
-      console.log("done fine");
-    }
-  }
-  displayJobs(359769);
+ 
   
