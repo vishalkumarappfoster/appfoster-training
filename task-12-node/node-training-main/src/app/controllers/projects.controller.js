@@ -5,17 +5,18 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Project
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.project_name) {
+  if (!req.body.name) {
     res.status(400).send({
-      message: "Content can not be empty!"
+      message: "Name can not be empty!"
     });
     return;
   }
 
   // Create a Project
   const project = {
-    userId: req.body.userId,
-    project_name: req.body.project_name
+    name: req.body.name,
+    userid:req.body.userid
+    
   };
 
   // Save Project in the database
@@ -31,10 +32,10 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all Projects from the database.
+// Retrieve all Users from the database.
 exports.findAll = (req, res) => {
-  const project_name = req.query.project_name;
-  var condition = project_name ? { project_name: { [Op.like]: `%${project_name}%` } } : null;
+  const name = req.query.name;
+  var condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
 
   Project.findAll({ where: condition })
     .then(data => {
@@ -43,7 +44,7 @@ exports.findAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving projects."
+          err.message || "Some error occurred while retrieving users."
       });
     });
 };
@@ -68,7 +69,6 @@ exports.findOne = (req, res) => {
       });
     });
 };
-
 // Update a Project by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
@@ -93,7 +93,6 @@ exports.update = (req, res) => {
       });
     });
 };
-
 // Delete a Project with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
@@ -118,34 +117,31 @@ exports.delete = (req, res) => {
       });
     });
 };
-
-// Delete all Projects from the database.
+// Delete all Users from the database.
 exports.deleteAll = (req, res) => {
-  Project.destroy({
-    where: {},
-    truncate: false
-  })
-    .then(nums => {
-      res.send({ message: `${nums} Projects were deleted successfully!` });
+    Project.destroy({
+      where: {},
     })
-    .catch(err => {
-      res.status(500).send({
-        message:
-        err.message || "Some error occurred while removing all projects."
-    });
-    });
-    };
-    
-    // Find all published Projects
-    exports.findAllPublished = (req, res) => {
-    Project.findAll({ where: { published: true } })
-    .then(data => {
-    res.send(data);
-    })
-    .catch(err => {
-    res.status(500).send({
-    message:
-    err.message || "Some error occurred while retrieving projects."
-    });
-    });
-    };
+      .then(num => {
+        res.send({ message: `${num} Users were deleted successfully!` });
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: err
+        });
+      });
+  };
+  // Find all Projects belonging to a user with the specified id
+exports.findAllByUser = (req, res) => {
+    const userId = req.params.userId;
+    Project.findAll({ where: { userId: userId} })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || `Error retrieving Projects for user with id=${userId}`
+        });
+      });
+  };

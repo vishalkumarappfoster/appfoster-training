@@ -14,11 +14,5 @@ module.exports = (sequelize, Sequelize) => {
     }
   });
 
-  User.associate = (models) => {
-    User.hasMany(models.Project, {
-      foreignKey: 'user_id'
-    });
-  };
-
   return User;
 };

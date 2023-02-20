@@ -1,7 +1,6 @@
 const db = require("../models");
 const Tutorial = db.tutorials;
 const Op = db.Sequelize.Op;
-
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
   // Validate request
@@ -11,7 +10,6 @@ exports.create = (req, res) => {
     });
     return;
   }
-
   // Create a Tutorial
   const tutorial = {
     title: req.body.title,

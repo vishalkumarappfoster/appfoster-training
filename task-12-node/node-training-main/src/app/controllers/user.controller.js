@@ -1,5 +1,7 @@
+const { users } = require("../models");
 const db = require("../models");
 const User = db.users;
+const Project=db.projects;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new User
@@ -17,7 +19,7 @@ exports.create = (req, res) => {
     name: req.body.name,
     age: req.body.age,
     address: req.body.address,
-    mobile_number: req.body.mobile_number
+    mobile_Number: req.body.mobile_Number
   };
 
   // Save User in the database
@@ -95,7 +97,6 @@ exports.update = (req, res) => {
       });
     });
 };
-
 // Delete a User with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
@@ -120,7 +121,6 @@ exports.delete = (req, res) => {
       });
     });
 };
-
 // Delete all Users from the database.
 exports.deleteAll = (req, res) => {
     User.destroy({
@@ -136,3 +136,4 @@ exports.deleteAll = (req, res) => {
       });
   };
   
+
