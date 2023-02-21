@@ -23,22 +23,24 @@ db.sequelize.sync()
     console.log("Failed to sync db: " + err.message);
   });
 // simple route
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
+
   res.render('pages/index');
 });
-require("./app/routes/tutorial.routes")(app);
-require("./app/routes/user.routes")(app);
-require("./app/routes/projects.routes")(app); 
 app.get('/users/:userid/projects', async (req, res) => {
-  console.log("user");
-  // const userid =  req.params.userid;
+  
+  // const userid =  req.params.userid;.
   // const user = await User.findOne({ where: { id: userid } });
   // console.log("user");
   // const projects = await Projects.findAll({ where: { userid: userid } });
   // res.json(projects);
 });
+require("./app/routes/tutorial.routes")(app);
+require("./app/routes/user.routes")(app);
+require("./app/routes/projects.routes")(app); 
+
 // set port, listen for rq
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
