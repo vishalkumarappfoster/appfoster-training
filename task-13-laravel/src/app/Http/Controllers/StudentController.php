@@ -2,62 +2,90 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StudentModel;
-use Illuminate\Http\Request;
+use App\Http\Requests\StudentRequest;
+use App\Http\Resources\StudentResource;
+use App\Models\Student;
+use Illuminate\Http\Exceptions\HttpException;
 
 class StudentController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        return view('student.index');
+        return StudentResource::collection(Student::paginate(25));
     }
 
-    // public function index()
-    // {
-    //     $students = StudentModel::all();
-    //     return view('students.index', compact('students'));
-    // }
-
-    public function create()
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\StudentRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StudentRequest $request)
     {
-        return view('students.create');
+        try {
+            $student = new Student;
+            $student->fill($request->validated())->save();
+
+            return new StudentResource($student);
+
+        } catch(\Exception $exception) {
+            throw new HttpException(400, "Invalid data - {$exception->getMessage}");
+        }
     }
 
-    public function store(Request $request)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:60',
-            'email' => 'required|email|max:100',
-            'gender' => 'nullable|in:M,F,O',
-        ]);
+        $student = Student::findOrFail($id);
 
-        $student = StudentModel::create($validatedData);
-
-        return redirect()->route('students.index')->with('success', 'Student added successfully!');
+        return new StudentResource($student);
     }
 
-    public function edit(StudentModel $student)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\StudentRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(StudentRequest $request, $id)
     {
-        return view('students.edit', compact('student'));
+        if (!$id) {
+            throw new HttpException(400, "Invalid id");
+        }
+
+        try {
+            $student = Student::find($id);
+            $student->fill($request->validated())->save();
+
+            return new StudentResource($student);
+
+        } catch(\Exception $exception) {
+            throw new HttpException(400, "Invalid data - {$exception->getMessage}");
+        }
     }
 
-    public function update(Request $request, StudentModel $student)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:60',
-            'email' => 'required|email|max:100',
-            'gender' => 'nullable|in:M,F,O',
-        ]);
-
-        $student->update($validatedData);
-
-        return redirect()->route('students.index')->with('success', 'Student updated successfully!');
-    }
-
-    public function destroy(StudentModel $student)
-    {
+        $student = Student::findOrFail($id);
         $student->delete();
 
-        return redirect()->route('students.index')->with('success', 'Student deleted successfully!');
+        return response()->json(null, 204);
     }
 }
