@@ -3,9 +3,9 @@ const db = require("../models");
 const User = db.users;
 const Project=db.projects;
 const Op = db.Sequelize.Op;
-exports.projects = (req, res) => {
-  console.log('-------------------');
-}
+// exports.projects = (req, res) => {
+//   console.log('-------------------');
+// }
 // Create and Save a new User
 exports.create = (req, res) => {
   // Validate request
@@ -123,6 +123,7 @@ exports.delete = (req, res) => {
       });
     });
 };
+
 // Delete all Users from the database.
 exports.deleteAll = (req, res) => {
     User.destroy({

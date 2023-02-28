@@ -18,15 +18,13 @@ const sequelize = new Sequelize(
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+
 db.tutorials = require("./tutorial.model.js")(sequelize, Sequelize);
 db.users = require("./user.model.js")(sequelize, Sequelize);
 db.projects = require("./projects.model.js")(sequelize, Sequelize)
 
-// Define associations
-db.projects.belongsTo(db.users, {
-  foreignKey: 'userid', as: 'owner'
-});
-db.users.hasMany(db.projects, {
-  foreignKey: 'userid', as: 'projects' });
+// Define relations
+db.users.hasMany(db.projects, { foreignKey: 'userid', as: 'projects' });
+db.projects.belongsTo(db.users, { foreignKey: 'userid', as: 'user' });
 
 module.exports = db;

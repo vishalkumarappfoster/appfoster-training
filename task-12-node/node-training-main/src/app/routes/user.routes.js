@@ -1,8 +1,8 @@
 module.exports = app => {
   const users = require("../controllers/user.controller.js");
   var router = require("express").Router();
+ 
   // Create a new User
-  router.delete("/users1",users.projects);
   router.post("/", users.create);
 
   // Retrieve all Users

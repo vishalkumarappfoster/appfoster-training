@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const Project = sequelize.define("project", {
-    user_id: {
+    userid: {
       type: Sequelize.INTEGER
     },
     project_name: {
@@ -9,8 +9,8 @@ module.exports = (sequelize, Sequelize) => {
   });
 
   // Define a many-to-one association between Projects and Users
-  Project.belongsTo(sequelize.models.user, {
-    foreignKey: "user_id"
-  });
+  // Project.belongsTo(sequelize.models.user, {
+  //   foreignKey: "user_id"
+  // });
   return Project;
 };
