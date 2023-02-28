@@ -104,4 +104,15 @@ class ProjectController extends Controller
 
         return response()->json(null, 204);
     }
+
+    public function allProjects()
+    {
+        $projects = Project::all();
+    
+        return ProjectResource::collection($projects);
+    }
+
 }
+
+
+

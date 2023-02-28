@@ -26,19 +26,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth.basic')->group(function () {
-    Route::apiResource('books', BooksController::class);
-    Route::resource('students', StudentController::class);
-    // Route::resource('projects', ProjectController::class);
-
-    // Route::get('/students/{student}/projects', [StudentController::class, 'projects']);
-    Route::resource('/students/{student}/projects', ProjectController::class)->shallow()->parameters([
-        'projects' => 'id',
-    ]);
 
 
+Route::group(['middleware' => ['auth.basic']], function () {
+   
+    Route::group(['prefix' => 'students'], function () {
+        Route::apiResource('projects', ProjectController::class);
+        Route::apiResource('{student_id}/projects',StudentController::class);
+    });
+    Route::get('/projects', [ProjectController::class, 'allProjects']);
+    Route::apiResource('students', StudentController::class);
+    
 
 });
+
+
 
 Route::get('/', function () {
     return response()->json([
